@@ -1,111 +1,29 @@
-# Netflix-data-Analysis
+# 📊 Data Cleaning & Analysis Project
+
+This is a mini data analysis project using **Python, Pandas, and Matplotlib**.  
+I worked on two datasets:
+- Netflix Dataset (`netflix_titles.csv`)
+- COVID-19 Dataset (`covid_19_data.csv`)
+
+## 📂 Project Files
+- `netflix_analysis.py` → Netflix data cleaning + analysis + visualization
+- `covid_analysis.py` → COVID-19 data cleaning + analysis + visualization
+- Output images (`.png`) are saved after running the scripts.
+
+## ⚙️ Requirements
+- Python 3.7+
+- Pandas
+- Matplotlib
+
+Install dependencies:
+```bash
+pip install pandas matplotlib
+
+▶️ How to Run
+
+1. Clone this repository:
+
+git clone https://github.com/divyakurrey-pixel/Data-Analysis-Projects.git
+cd Data-Analysis-Projects Netflix-data-Analysis
 Netflix Dataset cleaning and analysis using Python, pandas and Matplotlib. 
 
-# netflix_analysis.py
-
-# 📌 Step 1: Import libraries
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 📌 Step 2: Load dataset
-df = pd.read_csv("netflix_titles.csv")
-
-# 📌 Step 3: Basic info
-print("Dataset Shape:", df.shape)
-print("\nColumns:", df.columns)
-print("\nMissing values:\n", df.isnull().sum())
-
-# 📌 Step 4: Data Cleaning
-# Fill missing values
-df['country'].fillna("Unknown", inplace=True)
-df['date_added'].fillna("Unknown", inplace=True)
-df['rating'].fillna("Unknown", inplace=True)
-
-# Drop duplicates if any
-df.drop_duplicates(inplace=True)
-
-print("\nAfter Cleaning:")
-print(df.isnull().sum())
-
-# 📌 Step 5: Basic Analysis
-print("\nTotal Movies:", df[df['type'] == "Movie"].shape[0])
-print("Total TV Shows:", df[df['type'] == "TV Show"].shape[0])
-
-# Count by country
-top_countries = df['country'].value_counts().head(10)
-print("\nTop 10 countries producing content:\n", top_countries)
-
-# 📌 Step 6: Visualization
-# Movies vs TV Shows
-df['type'].value_counts().plot(kind='bar', color=['skyblue', 'lightgreen'])
-plt.title("Movies vs TV Shows on Netflix")
-plt.xlabel("Type")
-plt.ylabel("Count")
-plt.savefig("movies_vs_tvshows.png")
-plt.show()
-
-# Top 10 Countries
-top_countries.plot(kind='barh', color='orange')
-plt.title("Top 10 Content Producing Countries")
-plt.xlabel("Count")
-plt.ylabel("Country")
-plt.savefig("top_countries.png")
-plt.show()
-
-
----
-
-✅ Sample Output (Console)
-
-Dataset Shape: (8807, 12)
-
-Columns: Index(['show_id', 'type', 'title', 'director', 'cast', 'country',
-       'date_added', 'release_year', 'rating', 'duration', 'listed_in',
-       'description'],
-      dtype='object')
-
-Missing values:
- show_id           0
-type              0
-title             0
-director       2634
-cast           825
-country        831
-date_added     10
-release_year     0
-rating         4
-duration        3
-listed_in       0
-description     0
-dtype: int64
-
-After Cleaning:
- show_id        0
-type           0
-title          0
-director    2634
-cast         825
-country        0
-date_added     0
-release_year   0
-rating         0
-duration       3
-listed_in      0
-description    0
-dtype: int64
-
-Total Movies: 6131
-Total TV Shows: 2676
-
-Top 10 countries producing content:
- United States     2818
-India              972
-United Kingdom     419
-Unknown            831
-Japan              245
-South Korea        199
-Canada             181
-Spain              145
-France             109
-Mexico              99
-Name: country, dtype: int64
